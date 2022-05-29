@@ -13,7 +13,6 @@ namespace NovaPokedexApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly PokeContext _pokeContext;
-
         private readonly IUnitOfWork _unitOfWork;
 
         public UserController(PokeContext pokeContext)
@@ -24,16 +23,24 @@ namespace NovaPokedexApi.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<User> UserGet()
+        public IActionResult UserGet()
         {
-            return _unitOfWork.UserRepository.UserGet();
+            var users = _unitOfWork.UserRepository.UserGet();
+
+            if(users == null)
+                return NotFound();
+            return Ok(users);
         }
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public User UserGet(Guid id)
+        public IActionResult UserGet(Guid id)
         {
-            return _unitOfWork.UserRepository.UserGetById(id);
+            var user = _unitOfWork.UserRepository.UserGetById(id);
+
+            if (user == null)
+                return NotFound();
+            return Ok(user);
         }
 
         // POST api/<UserController>

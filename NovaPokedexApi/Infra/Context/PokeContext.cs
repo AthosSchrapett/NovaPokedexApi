@@ -5,9 +5,6 @@ namespace NovaPokedexApi.Infra.Context
 {
     public class PokeContext : DbContext
     {
-        public PokeContext()
-        {
-        }
 
         public PokeContext(DbContextOptions<PokeContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }

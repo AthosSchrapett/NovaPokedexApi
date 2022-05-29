@@ -14,7 +14,6 @@ namespace NovaPokedexApi.Repositories
         public UserRepository(PokeContext pokeContext)
         {
             _pokeContext = pokeContext;
-            _unitOfWork = new UnitOfWork(_pokeContext);
         }
 
         public IEnumerable<User> UserGet()
