@@ -9,6 +9,11 @@ namespace NovaPokedexApi.Infra.Context
         public PokeContext(DbContextOptions<PokeContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(@"Server=localhost;Database=NovaPokedexApiDB;User Id=postgres;Password=1234;");
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

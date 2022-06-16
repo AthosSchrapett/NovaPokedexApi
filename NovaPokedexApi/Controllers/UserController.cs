@@ -2,9 +2,6 @@
 using NovaPokedexApi.Infra.Context;
 using NovaPokedexApi.Infra.UnitOfWork;
 using NovaPokedexApi.Models;
-using NovaPokedexApi.Repositories;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace NovaPokedexApi.Controllers
 {

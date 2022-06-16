@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NovaPokedexApi.Infra.Context;
 using NovaPokedexApi.Infra.UnitOfWork;
 using NovaPokedexApi.Models;
@@ -14,6 +13,7 @@ namespace NovaPokedexApi.Repositories
         public UserRepository(PokeContext pokeContext)
         {
             _pokeContext = pokeContext;
+            _unitOfWork = new UnitOfWork(_pokeContext);
         }
 
         public IEnumerable<User> UserGet()
