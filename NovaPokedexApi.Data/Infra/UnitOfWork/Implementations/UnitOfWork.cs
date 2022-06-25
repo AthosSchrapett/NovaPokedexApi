@@ -1,11 +1,12 @@
-﻿using NovaPokedexApi.Infra.Context;
-using NovaPokedexApi.Repositories;
+﻿using NovaPokedexApi.Data.Infra.Repositories;
+using NovaPokedexApi.Infra.Context;
 
 namespace NovaPokedexApi.Infra.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
         private IUserRepository _userRepository;
+
         private readonly PokeContext _pokeContext;
 
         public UnitOfWork(PokeContext pokeContext)
