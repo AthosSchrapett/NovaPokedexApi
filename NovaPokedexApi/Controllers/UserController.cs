@@ -27,7 +27,6 @@ namespace NovaPokedexApi.Controllers
             return Ok(users);
         }
 
-        // GET api/<UserController>/5
         [HttpGet("{id}")]
         public IActionResult UserGet(Guid id)
         {
@@ -38,21 +37,18 @@ namespace NovaPokedexApi.Controllers
             return Ok(user);
         }
 
-        // POST api/<UserController>
         [HttpPost]
         public void UserPost([FromBody] User user)
         {
             _userService.UserPost(user);
         }
 
-        // PUT api/<UserController>/5
         [HttpPut("{id}")]
         public void UserPut(Guid id, [FromBody] User user)
         {
             _userService.UserPut(id, user);
         }
 
-        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public void UserDelete(Guid id)
         {

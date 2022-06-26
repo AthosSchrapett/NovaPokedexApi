@@ -11,34 +11,34 @@ namespace NovaPokedexApi.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly PokeContext _pokeContext;
         private readonly IConfiguration _configuration;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ITokenService _tokenService;
+        private readonly IUserService _userService;
 
-        public LoginController(PokeContext pokeContext, IConfiguration configuration)
+        public LoginController(IConfiguration configuration, ITokenService tokenService, IUserService userService)
         {
-            _pokeContext = pokeContext;
             _configuration = configuration;
-            _unitOfWork = new UnitOfWork(_pokeContext);
+            _tokenService = tokenService;
+            _userService = userService;
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult<dynamic>> Authenticate([FromBody] User user)
-        //{
-        //    var usuarioEncontrado = _unitOfWork.UserRepository.UserGetByNameAndPassword(user.UserName, user.Password);
+        [HttpPost]
+        public async Task<ActionResult<dynamic>> Authenticate(string userName, string password)
+        {
+            var usuarioEncontrado = _userService.UserGetByNameAndPassword(userName, password);
 
-        //    if(usuarioEncontrado.UserName == null || usuarioEncontrado.Password == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (usuarioEncontrado == null)
+            {
+                return NotFound();
+            }
 
-        //    var token = TokenService.GenerateToken(usuarioEncontrado, _configuration);
+            var token = _tokenService.GenerateToken(usuarioEncontrado, _configuration);
 
-        //    return Ok(new
-        //    {
-        //        user = usuarioEncontrado,
-        //        token = token
-        //    });
-        //}
+            return Ok(new
+            {
+                user = usuarioEncontrado,
+                token = token
+            });
+        }
     }
 }

@@ -15,6 +15,7 @@ builder.Services.AddCors();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddNpgsql<PokeContext>(builder.Configuration["ConnectionString:NovaPokedexApiDB"]);
 
