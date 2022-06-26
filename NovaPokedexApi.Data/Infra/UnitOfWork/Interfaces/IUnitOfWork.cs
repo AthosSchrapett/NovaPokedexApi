@@ -2,9 +2,9 @@
 
 namespace NovaPokedexApi.Infra.UnitOfWork
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IUserRepository UserRepository { get; }
-        void commit();
+        void Commit();
     }
 }

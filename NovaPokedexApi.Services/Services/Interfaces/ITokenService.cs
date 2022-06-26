@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
+using NovaPokedexApi.Models;
 
-namespace NovaPokedexApi.Services.Services
+namespace NovaPokedexApi.Services
 {
     public interface ITokenService
     {
+        string GenerateToken(User user, IConfiguration configuration);
     }
 }

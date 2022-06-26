@@ -5,9 +5,13 @@ namespace NovaPokedexApi.Infra.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
+        #region Repositories
         private IUserRepository _userRepository;
+        #endregion
 
+        #region Context
         private readonly PokeContext _pokeContext;
+        #endregion
 
         public UnitOfWork(PokeContext pokeContext)
         {
@@ -26,14 +30,14 @@ namespace NovaPokedexApi.Infra.UnitOfWork
             }
         }
 
-        public void commit()
+        public void Commit()
         {
             _pokeContext.SaveChanges();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _pokeContext.Dispose();
         }
     }
 }

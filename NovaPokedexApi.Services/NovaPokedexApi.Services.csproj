@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NovaPokedexApi.Data\NovaPokedexApi.Data.csproj" />
     <ProjectReference Include="..\NovaPokedexApi.Models\NovaPokedexApi.Models.csproj" />
   </ItemGroup>
 
