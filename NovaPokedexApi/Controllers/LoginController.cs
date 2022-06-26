@@ -29,7 +29,7 @@ namespace NovaPokedexApi.Controllers
 
             if (usuarioEncontrado == null)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             var token = _tokenService.GenerateToken(usuarioEncontrado, _configuration);
