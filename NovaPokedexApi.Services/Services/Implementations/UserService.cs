@@ -1,34 +1,46 @@
-﻿using NovaPokedexApi.Models;
+﻿using NovaPokedexApi.Infra.UnitOfWork;
+using NovaPokedexApi.Models;
 
 namespace NovaPokedexApi.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUnitOfWork _unitOfWork; 
+        private readonly IUnitOfWork _unitOfWork;
 
-        public void UserDelete(Guid id)
+        public UserService(IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            _unitOfWork = unitOfWork;
         }
 
         public List<User> UserGet()
         {
-            throw new NotImplementedException();
+            return _unitOfWork.UserRepository.UserGet().ToList();
         }
 
         public User UserGetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.UserRepository.GetById(id);
         }
 
         public void UserPost(User User)
         {
-            throw new NotImplementedException();
+            _unitOfWork.UserRepository.Post(User);
+            _unitOfWork.Commit();
         }
 
-        public void UserPut(Guid id, User User, User UserUpdated)
+        public void UserPut(Guid id, User user)
         {
-            throw new NotImplementedException();
+            var userFind = _unitOfWork.UserRepository.GetById(id);
+            user.Id = id;
+
+            _unitOfWork.UserRepository.Update(id, user, userFind);
+            _unitOfWork.Commit();
+        }
+
+        public void UserDelete(Guid id)
+        {
+            _unitOfWork.UserRepository.Delete(id);
+            _unitOfWork.Commit();
         }
     }
 }

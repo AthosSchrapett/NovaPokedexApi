@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using NovaPokedexApi.Data.Infra.Repositories;
 using NovaPokedexApi.Infra.Context;
 using NovaPokedexApi.Infra.UnitOfWork;
+using NovaPokedexApi.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddNpgsql<PokeContext>(builder.Configuration["ConnectionString:NovaPokedexApiDB"]);
 

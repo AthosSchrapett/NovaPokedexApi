@@ -22,23 +22,23 @@ namespace NovaPokedexApi.Controllers
             _unitOfWork = new UnitOfWork(_pokeContext);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody] User user)
-        {
-            var usuarioEncontrado = _unitOfWork.UserRepository.UserGetByNameAndPassword(user.UserName, user.Password);
+        //[HttpPost]
+        //public async Task<ActionResult<dynamic>> Authenticate([FromBody] User user)
+        //{
+        //    var usuarioEncontrado = _unitOfWork.UserRepository.UserGetByNameAndPassword(user.UserName, user.Password);
 
-            if(usuarioEncontrado.UserName == null || usuarioEncontrado.Password == null)
-            {
-                return NotFound();
-            }
+        //    if(usuarioEncontrado.UserName == null || usuarioEncontrado.Password == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var token = TokenService.GenerateToken(usuarioEncontrado, _configuration);
+        //    var token = TokenService.GenerateToken(usuarioEncontrado, _configuration);
 
-            return Ok(new
-            {
-                user = usuarioEncontrado,
-                token = token
-            });
-        }
+        //    return Ok(new
+        //    {
+        //        user = usuarioEncontrado,
+        //        token = token
+        //    });
+        //}
     }
 }

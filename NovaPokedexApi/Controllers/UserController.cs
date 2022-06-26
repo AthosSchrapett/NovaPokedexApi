@@ -2,6 +2,7 @@
 using NovaPokedexApi.Infra.Context;
 using NovaPokedexApi.Infra.UnitOfWork;
 using NovaPokedexApi.Models;
+using NovaPokedexApi.Services;
 
 namespace NovaPokedexApi.Controllers
 {
@@ -9,22 +10,19 @@ namespace NovaPokedexApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly PokeContext _pokeContext;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public UserController(PokeContext pokeContext)
+        public UserController(IUserService userService)
         {
-            _pokeContext = pokeContext;
-            _unitOfWork = new UnitOfWork(_pokeContext);
+            _userService = userService;
         }
 
-        // GET: api/<UserController>
         [HttpGet]
         public IActionResult UserGet()
         {
-            var users = _unitOfWork.UserRepository.UserGet();
+            var users = _userService.UserGet();
 
-            if(users == null)
+            if (users == null)
                 return NotFound();
             return Ok(users);
         }
@@ -33,7 +31,7 @@ namespace NovaPokedexApi.Controllers
         [HttpGet("{id}")]
         public IActionResult UserGet(Guid id)
         {
-            var user = _unitOfWork.UserRepository.UserGetById(id);
+            var user = _userService.UserGetById(id);
 
             if (user == null)
                 return NotFound();
@@ -44,21 +42,21 @@ namespace NovaPokedexApi.Controllers
         [HttpPost]
         public void UserPost([FromBody] User user)
         {
-            _unitOfWork.UserRepository.UserPost(user);
+            _userService.UserPost(user);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
         public void UserPut(Guid id, [FromBody] User user)
         {
-            _unitOfWork.UserRepository.UserUpdate(id, user);
+            _userService.UserPut(id, user);
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public void UserDelete(Guid id)
         {
-            _unitOfWork.UserRepository.UserDelete(id);
+            _userService.UserDelete(id);
         }
     }
 }
