@@ -23,9 +23,9 @@ namespace NovaPokedexApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<dynamic>> Authenticate(string userName, string password)
+        public async Task<ActionResult<dynamic>> Authenticate([FromBody] Login login)
         {
-            var usuarioEncontrado = _userService.UserGetByNameAndPassword(userName, password);
+            var usuarioEncontrado = _userService.UserGetByNameAndPassword(login.UserName, login.Password);
 
             if (usuarioEncontrado == null)
             {
