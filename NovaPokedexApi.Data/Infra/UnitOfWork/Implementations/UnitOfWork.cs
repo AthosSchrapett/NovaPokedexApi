@@ -1,4 +1,5 @@
-﻿using NovaPokedexApi.Data.Infra.Repositories;
+﻿using Microsoft.AspNetCore.Identity;
+using NovaPokedexApi.Data.Infra.Repositories;
 using NovaPokedexApi.Infra.Context;
 
 namespace NovaPokedexApi.Infra.UnitOfWork
@@ -7,10 +8,12 @@ namespace NovaPokedexApi.Infra.UnitOfWork
     {
         #region Repositories
         private IUserRepository _userRepository;
+        private IUserIdentityRepository _userIdentityRepository;
         #endregion
 
         #region Context
         private readonly PokeContext _pokeContext;
+        //private readonly UserManager<IdentityUser> _userManager;
         #endregion
 
         public UnitOfWork(PokeContext pokeContext)
@@ -27,6 +30,18 @@ namespace NovaPokedexApi.Infra.UnitOfWork
                     _userRepository = new UserRepository(_pokeContext);
                 }
                 return _userRepository;
+            }
+        }
+
+        public IUserIdentityRepository UserIdentityRepository
+        {
+            get
+            {
+                if (_userIdentityRepository == null)
+                {
+                     _userIdentityRepository = new UserIdentityRepository(_pokeContext);
+                }
+                return _userIdentityRepository;
             }
         }
 

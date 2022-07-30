@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NovaPokedexApi.Infra.Context;
 using NovaPokedexApi.Infra.UnitOfWork;
@@ -14,7 +15,7 @@ namespace NovaPokedexApi.Controllers
         private readonly IConfiguration _configuration;
         private readonly ITokenService _tokenService;
         private readonly IUserService _userService;
-
+        
         public LoginController(IConfiguration configuration, ITokenService tokenService, IUserService userService)
         {
             _configuration = configuration;
@@ -22,23 +23,23 @@ namespace NovaPokedexApi.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody] Login login)
-        {
-            var usuarioEncontrado = _userService.UserGetByNameAndPassword(login.UserName, login.Password);
+        //[HttpPost]
+        //public async Task<ActionResult<dynamic>> Authenticate([FromBody] Login login)
+        //{
+        //    var usuarioEncontrado = _userService.UserGetByNameAndPassword(login.UserName, login.Password);
 
-            if (usuarioEncontrado == null)
-            {
-                return BadRequest();
-            }
+        //    if (usuarioEncontrado == null)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            var token = _tokenService.GenerateToken(usuarioEncontrado, _configuration);
+        //    var token = _tokenService.GenerateToken(usuarioEncontrado, _configuration);
 
-            return Ok(new
-            {
-                user = usuarioEncontrado,
-                token = token
-            });
-        }
+        //    return Ok(new
+        //    {
+        //        user = usuarioEncontrado,
+        //        token = token
+        //    });
+        //}
     }
 }

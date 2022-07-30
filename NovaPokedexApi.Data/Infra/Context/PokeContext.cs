@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NovaPokedexApi.Models;
 
 namespace NovaPokedexApi.Infra.Context
 {
-    public class PokeContext : DbContext
+    public class PokeContext : IdentityDbContext
     {
 
         public PokeContext(DbContextOptions<PokeContext> options) : base(options) { }
